@@ -1,8 +1,10 @@
 import {h, Fragment} from 'preact';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {useState} from 'preact/compat';
 
 import {TokenInput} from './TokenInput.jsx';
-import {useEffect} from "preact/hooks";
+import {useEffect, useMemo} from "preact/hooks";
+import {CssBaseline, useMediaQuery} from "@material-ui/core";
 
 const App = () => {
     const [token, updateToken] = useState(undefined);
@@ -38,20 +40,39 @@ const App = () => {
         }
     }, [token])
 
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+    const theme = useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: prefersDarkMode ? 'dark' : 'light',
+                },
+            }),
+        [prefersDarkMode],
+    );
+
     return (
-        <Fragment>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
             {!token || tokenIsSadge ?
                 <TokenInput updateToken={handleTokenUpdate} verifyingToken={verifyingToken}
                             tokenIsSadge={tokenIsSadge}/>
                 : <Fragment>
                     {transactions ?
                         JSON.stringify(transactions)
-                        : <p>hUwUraay! l0w0-rding</p>
+                        : <>
+                            <p>hUwUraay! l0w0-rding</p>
+                            <img
+                                alt="trust me you don't want to know anymore about lightning mcqueen"
+                                src="https://64.media.tumblr.com/8d9379b5262b4d24d5fa4dac4a008d56/tumblr_os33ocsLtQ1vom0g7o2_r1_540.gifv"
+                            />
+                        </>
                     }
                 </Fragment>
             }
-        </Fragment>
+        </ThemeProvider>
     );
-};
+}
 
-export {App};
+export {App}
