@@ -1,4 +1,4 @@
-import {h, Fragment useState} from 'preact';
+import {h, Fragment, useState} from 'preact';
 
 import {TokenInput} from './TokenInput';
 
