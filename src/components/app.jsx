@@ -2,12 +2,12 @@ import {h, Fragment} from 'preact';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {useState} from 'preact/compat';
 
-import {TokenInput} from './TokenInput.jsx';
+import {TokenInput} from './login/TokenInput.jsx';
 import {useEffect, useMemo} from "preact/hooks";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
-import {Loading} from "./Loading";
-import {Redirect} from "./Redirect";
-import {Search} from "./Search";
+import {Loading} from "./loading/Loading";
+import {Redirect} from "./util/Redirect";
+import {Search} from "./search/Search";
 import Router, {route} from "preact-router";
 
 const App = () => {
