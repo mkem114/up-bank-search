@@ -32,7 +32,7 @@ const TokenInput = ({updateToken, verifyingToken, tokenIsSadge}) => {
             disabled={verifyingToken}
             variant="contained"
         >
-            Paste
+            PASTaEnergy
         </Button>
         <Button
             color="primary"
@@ -41,7 +41,7 @@ const TokenInput = ({updateToken, verifyingToken, tokenIsSadge}) => {
             variant="contained"
         >
             {!verifyingToken ?
-                <Fragment>YEET!</Fragment>
+                <Fragment>KACHOW!</Fragment>
                 : <CircularProgress/>
             }
         </Button>
