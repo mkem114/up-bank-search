@@ -2,7 +2,7 @@ import {h, Fragment} from 'preact';
 import {Button, CircularProgress, FormControl, FormHelperText, Input, InputLabel, Link} from '@material-ui/core';
 import {useState} from "preact/hooks";
 
-const TokenInput = ({updateToken, verifyingToken, tokenIsSadge}) => {
+const Login = ({updateToken, verifyingToken, tokenIsSadge}) => {
     const [tokenInput, updateTokenInput] = useState('');
     const handleTokenInputChange = (event) => updateTokenInput(event.target.value);
     const handleSubmitToken = () => updateToken(tokenInput);
@@ -56,4 +56,4 @@ const TokenInput = ({updateToken, verifyingToken, tokenIsSadge}) => {
     </Fragment>
 }
 
-export {TokenInput}
+export {Login}

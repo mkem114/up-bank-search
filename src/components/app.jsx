@@ -2,7 +2,7 @@ import {h, Fragment} from 'preact';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {useState} from 'preact/compat';
 
-import {TokenInput} from './login/TokenInput.jsx';
+import {Login} from './login/Login.jsx';
 import {useEffect, useMemo} from "preact/hooks";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
 import {Loading} from "./loading/Loading";
@@ -64,7 +64,7 @@ const App = () => {
             <CssBaseline/>
             <Router>
                 <Redirect path="/" to="/login" />
-                <TokenInput
+                <Login
                     path="/login"
                     tokenIsSadge={tokenIsSadge}
                     updateToken={handleTokenUpdate}
