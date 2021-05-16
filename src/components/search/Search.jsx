@@ -1,8 +1,14 @@
 import {h} from 'preact';
+import transitions from "@material-ui/core/styles/transitions";
 
 const Search = ({transactions}) => {
     return <>
-        {JSON.stringify(transactions)}
+        {transactions.map(transaction => <>
+            {JSON.stringify(transaction)}
+            <br/>
+            <br/>
+            <br/>
+        </>)}
     </>
 }
 
