@@ -5,6 +5,10 @@ import {useState} from 'preact/compat';
 import {TokenInput} from './TokenInput.jsx';
 import {useEffect, useMemo} from "preact/hooks";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
+import {Loading} from "./Loading";
+import {Redirect} from "./Redirect";
+import {Search} from "./Search";
+import Router, {route} from "preact-router";
 
 const App = () => {
     const [token, updateToken] = useState(undefined);
@@ -24,6 +28,7 @@ const App = () => {
         if (pingResponse.ok) {
             updateToken(token)
             updateTokenIsSadge(false)
+            route('/loading')
         } else {
             updateTokenIsSadge(true)
         }
@@ -36,12 +41,14 @@ const App = () => {
                     authorization: `Bearer ${token}`
                 }
             })
-            transactionsResponse.json().then(data => updateTransactions(data.data))
+            transactionsResponse.json().then(data => {
+                updateTransactions(data.data)
+                route('/search')
+            })
         }
     }, [token])
 
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
     const theme = useMemo(
         () =>
             createMuiTheme({
@@ -55,22 +62,22 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            {!token || tokenIsSadge ?
-                <TokenInput updateToken={handleTokenUpdate} verifyingToken={verifyingToken}
-                            tokenIsSadge={tokenIsSadge}/>
-                : <Fragment>
-                    {transactions ?
-                        JSON.stringify(transactions)
-                        : <>
-                            <p>hUwUraay! l0w0-rding</p>
-                            <img
-                                alt="trust me you don't want to know anymore about lightning mcqueen"
-                                src="https://64.media.tumblr.com/8d9379b5262b4d24d5fa4dac4a008d56/tumblr_os33ocsLtQ1vom0g7o2_r1_540.gifv"
-                            />
-                        </>
-                    }
-                </Fragment>
-            }
+            <Router>
+                <Redirect path="/" to="/login" />
+                <TokenInput
+                    path="/login"
+                    tokenIsSadge={tokenIsSadge}
+                    updateToken={handleTokenUpdate}
+                    verifyingToken={verifyingToken}
+                />
+                <Loading
+                    path="/loading"
+                />
+                <Search
+                    path="/search"
+                    transactions={transactions}
+                />
+            </Router>
         </ThemeProvider>
     );
 }
