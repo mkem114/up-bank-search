@@ -3,5 +3,7 @@ node_modules
 /*.log
 .env
 .env.build
+.idea/
+*.iml
 
 .vercel
