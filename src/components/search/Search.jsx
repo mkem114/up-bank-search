@@ -164,37 +164,37 @@ const Search = ({transactions}) => {
                 rowGetter={({ index }) => transformedTransations[index]}
                 columns={[
                     {
-                        width: 200,
+                        width: 80,
                         label: 'Status',
                         dataKey: 'status',
                         numeric: false,
                     },
                     {
-                        width: 120,
-                        label: 'Description',
-                        dataKey: 'description',
-                        numeric: false,
-                    },
-                    {
-                        width: 120,
-                        label: 'Amount',
-                        dataKey: 'amount',
-                        numeric: true,
-                    },
-                    {
-                        width: 120,
-                        label: 'Currency',
-                        dataKey: 'currency',
-                        numeric: true,
-                    },
-                    {
-                        width: 120,
+                        width: 200,
                         label: 'Date',
                         dataKey: 'createdAt',
                         numeric: false,
                     },
                     {
-                        width: 120,
+                        width: 300,
+                        label: 'Description',
+                        dataKey: 'description',
+                        numeric: false,
+                    },
+                    {
+                        width: 100,
+                        label: 'Amount',
+                        dataKey: 'amount',
+                        numeric: true,
+                    },
+                    {
+                        width: 100,
+                        label: 'Currency',
+                        dataKey: 'currency',
+                        numeric: true,
+                    },
+                    {
+                        width: 150,
                         label: 'Category',
                         dataKey: 'parentCategory',
                         numeric: false,
