@@ -6,6 +6,14 @@ const Login = ({updateToken, verifyingToken, tokenIsSadge}) => {
     const [tokenInput, updateTokenInput] = useState('');
     const handleTokenInputChange = (event) => updateTokenInput(event.target.value);
     const handleSubmitToken = () => updateToken(tokenInput);
+    const handlePasteToken = () => {
+        const queryOpts = { name: 'clipboard-read', allowWithoutGesture: false };
+        navigator.permissions.query(queryOpts).then(() => {
+            navigator.clipboard.readText().then((clipboardString) => {
+                updateTokenInput(clipboardString)
+            })
+        })
+    }
 
     return <Fragment>
         <FormControl>
@@ -16,6 +24,7 @@ const Login = ({updateToken, verifyingToken, tokenIsSadge}) => {
                 id="api-token-input"
                 onChange={handleTokenInputChange}
                 type="password"
+                value={tokenInput}
             />
             <FormHelperText id="token-input-helper-text">
                 This only stored in memory. You can get an API token from:
@@ -30,6 +39,7 @@ const Login = ({updateToken, verifyingToken, tokenIsSadge}) => {
         </FormControl>
         <Button
             disabled={verifyingToken}
+            onClick={handlePasteToken}
             variant="contained"
         >
             PASTaEnergy
