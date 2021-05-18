@@ -148,6 +148,7 @@ const transformTransactions = (transactions) =>
         status: transaction.attributes.status,
         description: transaction.attributes.description,
         amount: transaction.attributes.amount.value,
+        currency: transaction.attributes.foreignAmount?.currencyCode || transaction.attributes.amount.currencyCode,
         createdAt: transaction.attributes.createdAt,
         parentCategory: transaction.relationships.parentCategory?.data?.id || '',
     }))
@@ -178,6 +179,12 @@ const Search = ({transactions}) => {
                         width: 120,
                         label: 'Amount',
                         dataKey: 'amount',
+                        numeric: true,
+                    },
+                    {
+                        width: 120,
+                        label: 'Currency',
+                        dataKey: 'currency',
                         numeric: true,
                     },
                     {
